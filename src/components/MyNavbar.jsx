@@ -17,9 +17,10 @@ const MyNavbar = () => {
             <div className="container w-full mx-auto flex py-0 items-center justify-between p-2 sm:px-4 md:px-6 lg:px-8 h-12 lg:h-16">
                 {/* Logo */}
                 <Link to="/" className="hidden md:block text-2xl font-bold text-red-700 cursor-pointer">
-                    <span>IDEAL</span><span>FAKE STORE</span>
+                    <span className="text-3xl pr-2 font-extrabold bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 
+                      bg-clip-text text-transparent animate-pulse">IDEAL</span><span className="text-3xl font-medium  text-blue-600">FAKE STORE</span>
                 </Link>
-                <Link to={'/'} className="text-red-600 md:hidden">IFS</Link>
+                <Link to={'/'} className="text-red-600 text-2xl px-3 font-bold md:hidden"><span className=" text-blue-600">I</span><span>F</span>S</Link>
 
                 {/* menu for mobile devices */}
 
@@ -36,7 +37,7 @@ const MyNavbar = () => {
                         // <Link to={item.link} key={item.id} className={`px-4 py-2 rounded-md transition-colors ${location.pathname === item.link ? "bg-yellow-400" : "hover:bg-red-400"}`}>
                         //     {item.title}
                         // </Link>
-                        <Link to={item.link} key={item.id} className={`hidden md:block text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-blue-600 hover:after:w-full hover:scale-110  after:transition-all ${location.pathname === item.link ? "text-blue-700 after:w-full shadow-md" : ""}`}>
+                        <Link to={item.link} key={item.id} className={`hidden md:block text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-blue-600 hover:after:w-full   after:transition-all ${location.pathname === item.link ? "text-blue-700 after:w-full shadow-md" : ""}`}>
                             {item.title}
                         </Link>
                     ))}
