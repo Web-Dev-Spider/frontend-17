@@ -1,13 +1,15 @@
-import { Link, Links, useLocation } from "react-router-dom";
+import { Link, Links, useLocation, useNavigate } from "react-router-dom";
 import { menuItems } from "../data/menuItems";
 import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 
 const MyNavbar = () => {
     const location = useLocation(); // Get current path
+    const navigate = useNavigate()
     const [isMobileView, setMobileView] = useState(false);
     const handleLogin = () => {
-        alert('Login button clicked')
+        // alert('Login button clicked')
+        navigate('/login')
     }
 
     return (
