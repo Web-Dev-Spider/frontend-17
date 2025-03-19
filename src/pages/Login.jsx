@@ -9,6 +9,7 @@ function Login() {
     })
 
     const [errors, setErrors] = useState({})
+    const [message, setMessage] = useState("")
     const navigate = useNavigate()
 
 
@@ -24,16 +25,21 @@ function Login() {
             event.preventDefault()
             if (!validateFormData()) return
 
-            // console.log(formData)
+            console.log(formData)
             const response = await axiosInstance.post('/auth/sign-in', formData)
             setFormData({ email: "", password: "" })
+            console.log('Response received at sign-in: \n',
+                response.data
+            )
+            // const { name } = response.data.data.user
+            console.log(response.data.message)
+            localStorage.setItem('token', response.data.token)
+            setMessage(response.data.message)
 
-            const { name } = response.data.data.user
-            localStorage.setItem('name', name)
-
-            navigate('/welcome')
+            navigate('/dashboard')
 
         } catch (error) {
+            setErrors(error)
             console.log(error)
         }
     }
@@ -58,26 +64,36 @@ function Login() {
 
     }
     return (
-        <form className='container flex justify-center items-center' onSubmit={handleLoginSubmit} noValidate>
-            <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-8 rounded-box">
-                <legend className="fieldset-legend text-xl">Login</legend>
+        <div className='h-full flex flex-1 items-center justify-center'>
+            <form className='container flex justify-center items-center' onSubmit={handleLoginSubmit} noValidate>
+                <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-8 rounded-box">
+                    <legend className="fieldset-legend text-xl">Login</legend>
 
-                <div className='relative'>
-                    <label className="fieldset-label mt-2">Email</label>
-                    <input type="email" className="input " placeholder="Email" name="email" value={formData.email} onChange={handleInputChange} onFocus={() => setErrors((prev) => ({ ...prev, email: " " }))} />
-                    <p className="text-red-500 text-xs min-h-[0.3rem] absolute left-0 top-full  ml-3">{errors.email || " "}</p>
-                </div>
-                <div className='w-full relative'>
-                    <label className="fieldset-label mt-2">Password</label>
-                    <input type="password" className="input" placeholder="Password" name="password" value={formData.password} onChange={handleInputChange} onFocus={() => setErrors((prev) => ({ ...prev, password: " " }))} />
-                    <p className="text-red-500 text-xs min-h-[0.3rem] absolute top-full left-0 ml-3">{errors.password || " "}</p>
-                </div>
+                    <div className='relative'>
+                        <label className="fieldset-label mt-2">Email</label>
+                        <input type="email" className="input " placeholder="Email" name="email" value={formData.email} onChange={handleInputChange} onFocus={() => setErrors((prev) => ({ ...prev, email: " " }))} />
+                        <p className="text-red-500 text-xs min-h-[0.3rem] absolute left-0 top-full  ml-3">{errors.email || " "}</p>
+                    </div>
+                    <div className='w-full relative'>
+                        <label className="fieldset-label mt-2">Password</label>
+                        <input type="password" className="input" placeholder="Password" name="password" value={formData.password} onChange={handleInputChange} onFocus={() => setErrors((prev) => ({ ...prev, password: " " }))} />
+                        <p className="text-red-500 text-xs min-h-[0.3rem] absolute top-full left-0 ml-3">{errors.password || " "}</p>
+                    </div>
 
-                <button className="btn btn-neutral mt-4" type='submit' >Login</button>
+                    <button className="btn btn-neutral mt-4" type='submit' >Login</button>
 
-                <p className='fle flex-col md:flex-row text-sm font-medium text-gray-700'>Don't have an account? <span className='text-blue-500 md:ml-2 hover:text-green-900'><Link to='/register'> Register</Link ></span></p>
-            </fieldset>
-        </form>
+                    <p className='fle flex-col md:flex-row text-sm font-medium text-gray-700'>Don't have an account? <span className='text-blue-500 md:ml-2 hover:text-green-900'><Link to='/register'> Register</Link ></span></p>
+                </fieldset>
+            </form>
+            {message != "" ?
+                <div role="alert" className="alert alert-success">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>{message}</span>
+                </div> : ""}
+        </div>
+
     )
 }
 

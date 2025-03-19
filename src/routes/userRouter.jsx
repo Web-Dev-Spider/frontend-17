@@ -7,7 +7,8 @@ import Home from "../pages/Home";
 import Settings from "../pages/Settings";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import Welcome from "../pages/Welcome";
+import Dashboard from "../pages/Dashboard";
+import ProtectedRoute from "./protectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -43,8 +44,12 @@ const router = createBrowserRouter([
         element: <Register />
       },
       {
-        path: '/welcome',
-        element: <Welcome />
+        path: '/dashboard',
+        element: <ProtectedRoute />,
+        children: [{
+          path: "",
+          element: <Dashboard />
+        }]
       }
     ],
   },

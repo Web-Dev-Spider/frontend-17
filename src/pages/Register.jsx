@@ -83,37 +83,40 @@ function Register() {
         return Object.keys(newErrors).length === 0;
     };
     return (
-        <form className='container flex justify-center items-center' onSubmit={handleFormSubmit} noValidate>
-            <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
-                <legend className="fieldset-legend text-xl">Register</legend>
+        <div className='h-full flex flex-1 items-center justify-center'>
+            <form className='container' onSubmit={handleFormSubmit} noValidate>
+                <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
+                    <legend className="fieldset-legend text-xl">Register</legend>
 
-                <div className='relative w-full'>
-                    <label className="fieldset-label">User name</label>
-                    <input type="text" className="input" placeholder="User name" name="name" value={formData.name} onChange={handleInputChange} onFocus={() => setErrors((prev) => ({ ...prev, name: " " }))} />
-                    <p className="text-red-500 text-xs min-h-[0.3rem] absolute left-0 top-full ml-3">{errors.name || " "}</p>
+                    <div className='relative w-full'>
+                        <label className="fieldset-label">User name</label>
+                        <input type="text" className="input" placeholder="User name" name="name" value={formData.name} onChange={handleInputChange} onFocus={() => setErrors((prev) => ({ ...prev, name: " " }))} />
+                        <p className="text-red-500 text-xs min-h-[0.3rem] absolute left-0 top-full ml-3">{errors.name || " "}</p>
 
-                </div>
-                <div className='relative'>
-                    <label className="fieldset-label mt-2">Email</label>
-                    <input type="email" className="input " placeholder="Email" name="email" value={formData.email} onChange={handleInputChange} onFocus={() => setErrors((prev) => ({ ...prev, email: " " }))} />
-                    <p className="text-red-500 text-xs min-h-[0.3rem] absolute left-0 top-full  ml-3">{errors.email || " "}</p>
-                </div>
-                <div className='w-full relative'>
-                    <label className="fieldset-label mt-2">Password</label>
-                    <input type="password" className="input" placeholder="Password" name="password" value={formData.password} onChange={handleInputChange} onFocus={() => setErrors((prev) => ({ ...prev, password: " " }))} />
-                    <p className="text-red-500 text-xs min-h-[0.3rem] absolute top-full left-0 ml-3">{errors.password || " "}</p>
-                </div>
-                <div className='w-full relative'>
-                    <label className="fieldset-label mt-2">Confirm Password</label>
-                    <input type="password" className="input" placeholder="Confirm Password" name="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange} onFocus={() => setErrors((prev) => ({ ...prev, confirmPassword: " " }))} />
-                    <p className="text-red-500 text-xs min-h-[0.3rem] absolute top-full left-0  ml-3">{errors.confirmPassword || " "}</p>
+                    </div>
+                    <div className='relative'>
+                        <label className="fieldset-label mt-2">Email</label>
+                        <input type="email" className="input " placeholder="Email" name="email" value={formData.email} onChange={handleInputChange} onFocus={() => setErrors((prev) => ({ ...prev, email: " " }))} />
+                        <p className="text-red-500 text-xs min-h-[0.3rem] absolute left-0 top-full  ml-3">{errors.email || " "}</p>
+                    </div>
+                    <div className='w-full relative'>
+                        <label className="fieldset-label mt-2">Password</label>
+                        <input type="password" className="input" placeholder="Password" name="password" value={formData.password} onChange={handleInputChange} onFocus={() => setErrors((prev) => ({ ...prev, password: " " }))} />
+                        <p className="text-red-500 text-xs min-h-[0.3rem] absolute top-full left-0 ml-3">{errors.password || " "}</p>
+                    </div>
+                    <div className='w-full relative'>
+                        <label className="fieldset-label mt-2">Confirm Password</label>
+                        <input type="password" className="input" placeholder="Confirm Password" name="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange} onFocus={() => setErrors((prev) => ({ ...prev, confirmPassword: " " }))} />
+                        <p className="text-red-500 text-xs min-h-[0.3rem] absolute top-full left-0  ml-3">{errors.confirmPassword || " "}</p>
 
-                </div>
-                <button type='submit' className="btn btn-neutral mt-4">Register</button>
+                    </div>
+                    <button type='submit' className="btn btn-neutral mt-4">Register</button>
 
-                <p className='flex flex-col md:flex-row text-sm text-gray-700'>Already have an account? <span className='text-blue-500 md:ml-2 hover:text-green-900'><Link to='/login'> Click to Login</Link ></span></p>
-            </fieldset>
-        </form>
+                    <p className='flex flex-col md:flex-row text-sm text-gray-700'>Already have an account? <span className='text-blue-500 md:ml-2 hover:text-green-900'><Link to='/login'> Click to Login</Link ></span></p>
+                </fieldset>
+            </form>
+        </div>
+
     )
 }
 
