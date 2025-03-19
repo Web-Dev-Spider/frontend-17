@@ -35,7 +35,7 @@ function Register() {
             alert(response.data.message || "Registration Successful!");
             setFormData({ name: "", email: "", password: "", confirmPassword: "" });
             setErrors({});
-            navigate('/welcome')
+            navigate('/dashboard')
         } catch (error) {
             console.log(error)
 
@@ -84,7 +84,7 @@ function Register() {
     };
     return (
         <div className='h-full flex flex-1 items-center justify-center'>
-            <form className='container' onSubmit={handleFormSubmit} noValidate>
+            <form className='' onSubmit={handleFormSubmit} noValidate>
                 <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
                     <legend className="fieldset-legend text-xl">Register</legend>
 
@@ -115,8 +115,8 @@ function Register() {
                     <p className='flex flex-col md:flex-row text-sm text-gray-700'>Already have an account? <span className='text-blue-500 md:ml-2 hover:text-green-900'><Link to='/login'> Click to Login</Link ></span></p>
                 </fieldset>
             </form>
-        </div>
 
+        </div>
     )
 }
 

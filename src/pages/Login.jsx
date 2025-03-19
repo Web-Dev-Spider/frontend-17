@@ -25,15 +25,20 @@ function Login() {
             event.preventDefault()
             if (!validateFormData()) return
 
-            console.log(formData)
-            const response = await axiosInstance.post('/auth/sign-in', formData)
+            console.log("The form data for login", formData)
+            const response = await axiosInstance.post('/auth/sign-in', formData, { withCredentials: true })
             setFormData({ email: "", password: "" })
             console.log('Response received at sign-in: \n',
-                response.data
+                response.data.message
             )
             // const { name } = response.data.data.user
-            console.log(response.data.message)
+            // console.log(response.data.message)
+            console.log("Token received from backend", response.data.token)
             localStorage.setItem('token', response.data.token)
+
+            //working okey.. token is stored and can be retried from browser...
+            // const tok = localStorage.getItem('token')
+            // console.log('token retrived from browser', tok)
             setMessage(response.data.message)
 
             navigate('/dashboard')
@@ -85,13 +90,31 @@ function Login() {
                     <p className='fle flex-col md:flex-row text-sm font-medium text-gray-700'>Don't have an account? <span className='text-blue-500 md:ml-2 hover:text-green-900'><Link to='/register'> Register</Link ></span></p>
                 </fieldset>
             </form>
-            {message != "" ?
+            {/* {message != "" ?
                 <div role="alert" className="alert alert-success">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span>{message}</span>
-                </div> : ""}
+                </div> : ""} */}
+            {message && (
+                <div role="alert" className="alert alert-success">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 shrink-0 stroke-current"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                    </svg>
+                    <span>{message}</span>
+                </div>
+            )}
         </div>
 
     )
