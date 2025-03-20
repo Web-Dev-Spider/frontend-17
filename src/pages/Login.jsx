@@ -95,7 +95,7 @@ function Login() {
 
                     <p className='fle flex-col md:flex-row text-sm font-medium text-gray-700'>Don't have an account? <span className='text-blue-500 md:ml-2 hover:text-green-900'><Link to='/register'> Register</Link ></span></p>
                 </fieldset>
-                <div className='flex items-start'><p>Errors</p></div>
+
             </form> : " "}
 
 
