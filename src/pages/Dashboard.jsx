@@ -42,7 +42,7 @@ function Dashboard() {
 
         }
         getUser()
-    }, [navigate])
+    }, [navigate, setUser])
     return (
         <div>
             {isLoading ? <div className='flex items-center justify-center'><AiOutlineLoading3Quarters /></div> : <div className='container items-start mx-auto md:ml-5 py-0 md:mt-6'>

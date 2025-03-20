@@ -25,7 +25,7 @@ function Register() {
 
         try {
             const response = await axiosInstance.post('/auth/sign-up', formData)
-            console.log(response)
+            console.log("Response received from backend", response)
             // console.log("Form submitted successfully", formData);
 
             const { name } = response.data.data.user
@@ -38,8 +38,8 @@ function Register() {
             navigate('/dashboard')
         } catch (error) {
             console.log(error)
-
-            alert(error.response?.data?.error || error.message || "Registration failed")
+            setErrors(error.message)
+            alert(`Error received at register ${error.response?.data?.error} || ${error.message} || Registration failed`)
         }
 
 
@@ -115,7 +115,7 @@ function Register() {
                     <p className='flex flex-col md:flex-row text-sm text-gray-700'>Already have an account? <span className='text-blue-500 md:ml-2 hover:text-green-900'><Link to='/login'> Click to Login</Link ></span></p>
                 </fieldset>
             </form>
-
+            {/* <p>{errors}</p> */}
         </div>
     )
 }

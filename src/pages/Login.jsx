@@ -9,7 +9,7 @@ function Login() {
     })
 
     const [errors, setErrors] = useState({})
-    const [message, setMessage] = useState("")
+    const [message, setMessage] = useState('')
     const navigate = useNavigate()
 
 
@@ -31,6 +31,8 @@ function Login() {
             console.log('Response received at sign-in: \n',
                 response.data.message
             )
+            setMessage(response.data.message)
+
             // const { name } = response.data.data.user
             // console.log(response.data.message)
             console.log("Token received from backend", response.data.token)
@@ -39,9 +41,13 @@ function Login() {
             //working okey.. token is stored and can be retried from browser...
             // const tok = localStorage.getItem('token')
             // console.log('token retrived from browser', tok)
-            setMessage(response.data.message)
+            // setMessage(response.data.message)
 
-            navigate('/dashboard')
+            setTimeout(() => {
+
+                navigate('/dashboard')
+            }, 2000)
+
 
         } catch (error) {
             setErrors(error)
@@ -70,7 +76,7 @@ function Login() {
     }
     return (
         <div className='h-full flex flex-1 items-center justify-center'>
-            <form className='container flex justify-center items-center' onSubmit={handleLoginSubmit} noValidate>
+            {!message ? <form className='container flex justify-center items-center' onSubmit={handleLoginSubmit} noValidate>
                 <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-8 rounded-box">
                     <legend className="fieldset-legend text-xl">Login</legend>
 
@@ -89,35 +95,28 @@ function Login() {
 
                     <p className='fle flex-col md:flex-row text-sm font-medium text-gray-700'>Don't have an account? <span className='text-blue-500 md:ml-2 hover:text-green-900'><Link to='/register'> Register</Link ></span></p>
                 </fieldset>
-            </form>
-            {/* {message != "" ?
-                <div role="alert" className="alert alert-success">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>{message}</span>
-                </div> : ""} */}
-            {message && (
-                <div role="alert" className="alert alert-success">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 shrink-0 stroke-current"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                    </svg>
-                    <span>{message}</span>
-                </div>
-            )}
-        </div>
+                <div className='flex items-start'><p>Errors</p></div>
+            </form> : " "}
 
+
+            {message ? <div role="alert" className="alert alert-success">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 shrink-0 stroke-current"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                </svg>
+                <span>{message}</span>
+
+            </div> : ""}
+        </div>
     )
 }
-
 export default Login
