@@ -24,7 +24,7 @@ function Register() {
         if (!validateForm()) return
 
         try {
-            const response = await axiosInstance.post('/auth/sign-up', formData)
+            const response = await axiosInstance.post('/api/auth/sign-up', formData)
             console.log("Response received from backend", response)
             // console.log("Form submitted successfully", formData);
 

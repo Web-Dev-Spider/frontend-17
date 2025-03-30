@@ -26,7 +26,7 @@ function Login() {
             if (!validateFormData()) return
 
             console.log("The form data for login", formData)
-            const response = await axiosInstance.post('/auth/sign-in', formData, { withCredentials: true })
+            const response = await axiosInstance.post('/api/auth/sign-in', formData, { withCredentials: true })
             setFormData({ email: "", password: "" })
             console.log('Response received at sign-in: \n',
                 response.data.message
